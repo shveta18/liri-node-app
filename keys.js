@@ -1,0 +1,4 @@
+# Spotify API keys
+
+SPOTIFY_ID=b237d9d3aa1f45c3a83e24ce5f4f373b
+SPOTIFY_SECRET=df7e76f8c4ab4ed883e8ca2c8d1608f0
