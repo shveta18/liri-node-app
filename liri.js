@@ -37,11 +37,18 @@ function spotify() {
 function concert() {
     axios.get("https://rest.bandsintown.com/v4/artists/" + searchField + "/events?app_id=codingbootcamp").then(
         function (response) {
-            console.log(response.data[0].datetime);
-        //   for (var i=0; i<response.length; i++){
-
-        //   }
             
+            console.log(response.data.length);
+
+            for (var i = 0; i<response.data.length; i++) {
+                console.log("-----------------------" + searchField + " event#"+ (i+1) + "------------------------------");
+                console.log("Name of Venue: " + response.data[i].venue.city + "," + response.data[i].venue.country);
+                console.log("Location of Venue: " + response.data[i].venue.location);
+                console.log("Date of Event: " + response.data[i].datetime);
+                
+
+            }
+        
         })
         .catch(function (error) {
             if (error.response) {
