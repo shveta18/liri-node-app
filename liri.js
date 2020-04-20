@@ -7,10 +7,16 @@
 var axios = require("axios");
 
 var app = process.argv[2];
-var searchField = process.argv[3];
+var searchField = "";
+var text = "";
 
-console.log("Text 1: " + app);
-console.log("text 2: " + searchField);
+for (var i = 3; i<process.argv.length; i++) {
+     text += " " + process.argv[i];
+    console.log("Search criteria was: " + text);
+}
+searchField = text; 
+console.log("COMPLETE field" + searchField); 
+
 
 switch (app) {
     case "spotify-this-song":
