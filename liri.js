@@ -1,10 +1,9 @@
-// var x = require("dotenv").config();
+var x = require("dotenv").config();
 
-// var keys = require("./keys.js");
-
-// should be able to do var spotify = new Spotify(keys.spotify);
+var keys = require("./keys.js");
 
 var axios = require("axios");
+
 
 var app = process.argv[2];
 var searchField = "";
@@ -37,7 +36,18 @@ switch (app) {
 }
 
 function spotify() {
-    //enter axios 
+
+    var Spotify = require('node-spotify-api');
+ 
+    var spotify = new Spotify(keys.spotify);
+     
+    spotify.search({ type: 'track', query: searchField }, function(err, data) {
+      if (err) {
+        return console.log('Error occurred: ' + err);
+      }
+     
+    console.log(JSON.stringify(data)); 
+    });
 };
 
 function concert() {
