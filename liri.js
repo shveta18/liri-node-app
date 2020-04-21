@@ -1,3 +1,4 @@
+var fs = require("fs");
 var x = require("dotenv").config();
 var keys = require("./keys.js");
 var axios = require("axios");
@@ -89,7 +90,6 @@ function movie() {
                     rottenTomatoesRating = ratingsArray[i].Value;
                 }
             }
-            console.log(response.data);
             console.log("Title of Movie: " + response.data.Title);
             console.log("Year movie came out: " + response.data.Year);
             console.log("IMDB Rating: " + response.data.imdbRAting);
@@ -114,5 +114,22 @@ function movie() {
 };
 
 function dowit() {
-    //enter axios 
+    fs.readFile("random.txt", "utf8", function(error,data){
+        if(error){
+            return console.log(error);
+        }
+ 
+        var dataArr = data.split(",");
+        searchField = dataArr[1];
+        if(dataArr[0]=="spotify-is-song"){
+            spotify();
+        }
+        else if(dataArr[0]=="concert-this"){
+            concert();
+        }
+        else if(dataArr[0]=="movie-this"){
+            movie();
+        }
+        
+    })
 };
