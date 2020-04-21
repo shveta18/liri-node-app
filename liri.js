@@ -3,14 +3,9 @@ var x = require("dotenv").config();
 var keys = require("./keys.js");
 var axios = require("axios");
 var app = process.argv[2];
-// concatenate all input criteria
-var searchField = "";
-var text = "";
-for (var i = 3; i < process.argv.length; i++) {
-    text += " " + process.argv[i];
-}
-searchField = text;
 
+//var search = process.argv[3];
+var searchField = process.argv.slice(3).join(" ");
 switch (app) {
     case "spotify-this-song":
         spotify();
