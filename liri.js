@@ -33,7 +33,7 @@ function spotify() {
     spotify
         .search({ type: 'track', query: searchField })
         .then(function (response) {
-            console.log(response.tracks);
+           
             for (var i = 0; i < response.tracks.items.length; i++) {
                 console.log("-----------------------" + searchField + " track result#" + (i + 1) + "------------------------------");
                 for (var j = 0; j < response.tracks.items[i].album.artists.length; j++) {
