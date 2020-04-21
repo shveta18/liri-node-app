@@ -38,13 +38,14 @@ function spotify() {
     spotify
         .search({ type: 'track', query: searchField })
         .then(function (response) {
+            console.log(response.tracks);
             for (var i = 0; i < response.tracks.items.length; i++) {
                 console.log("-----------------------" + searchField + " track result#" + (i + 1) + "------------------------------");
                 for (var j = 0; j < response.tracks.items[i].album.artists.length; j++) {
                     console.log("Artist: " + response.tracks.items[i].album.artists[j].name);
                     console.log("Song: " + response.tracks.items[i].name);
                     console.log("Preview song: " + response.tracks.items[i].href);
-                    console.log("Album name: " + response.tracks.items[i].album[j]);
+                    console.log("Album name: " + response.tracks.items[i].album.name);
                 }
             }
         })
