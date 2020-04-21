@@ -29,10 +29,13 @@ node liri.js [spotify-this-song|concert-this|movie-this] search term
 ![Movies](./movie.gif)
 ![Movies No Criteria](./movie-nocriteria.gif)
 ![Concert](./concert.gif)
-
+![Do What It Says](./do-what-it-says.gif)
 
 ### To run command from random.txt file
 
 ```bash
 node liri.js do-what-it-says
 ```
+
+## Role in development
+Shveta Kumar: Developer
