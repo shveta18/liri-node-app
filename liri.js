@@ -11,7 +11,6 @@ var text = "";
 
 for (var i = 3; i < process.argv.length; i++) {
     text += " " + process.argv[i];
-    console.log("Search criteria was: " + text);
 }
 searchField = text;
 console.log("COMPLETE field" + searchField);
@@ -40,11 +39,17 @@ function spotify() {
     var Spotify = require('node-spotify-api');
 
     var spotify = new Spotify(keys.spotify);
+    if (!searchField){
+        searchField = "The Sign";  
+        
+        
+    }  
 
     spotify
         .search({ type: 'track', query: searchField })
         .then(function (response) {
             console.log(response.tracks.items.length);
+            
 
             for (var i = 0; i < response.tracks.items.length; i++) {
 
@@ -53,11 +58,9 @@ function spotify() {
                 for (var j = 0; j < response.tracks.items[i].album.artists.length; j++) {
                     console.log("Artist: " + response.tracks.items[i].album.artists[j].name);
                     console.log("Song: " + response.tracks.items[i].name);
-
+                    console.log("Preview song: " + response.tracks.items[i].href);
+                    console.log("Album name: " + response.tracks.items[i].album[j]);
                 }
-
-
-
             }
         })
         .catch(function (err) {
