@@ -1,20 +1,14 @@
 var x = require("dotenv").config();
-
 var keys = require("./keys.js");
-
 var axios = require("axios");
-
-
 var app = process.argv[2];
+// concatenate all input criteria
 var searchField = "";
 var text = "";
-
 for (var i = 3; i < process.argv.length; i++) {
     text += " " + process.argv[i];
 }
 searchField = text;
-console.log("COMPLETE field" + searchField);
-
 
 switch (app) {
     case "spotify-this-song":
@@ -35,26 +29,16 @@ switch (app) {
 }
 
 function spotify() {
-
     var Spotify = require('node-spotify-api');
-
     var spotify = new Spotify(keys.spotify);
-    if (!searchField){
-        searchField = "The Sign";  
-        
-        
-    }  
-
+    if (!searchField) {
+        searchField = "The Sign";
+    }
     spotify
         .search({ type: 'track', query: searchField })
         .then(function (response) {
-            console.log(response.tracks.items.length);
-            
-
             for (var i = 0; i < response.tracks.items.length; i++) {
-
                 console.log("-----------------------" + searchField + " track result#" + (i + 1) + "------------------------------");
-
                 for (var j = 0; j < response.tracks.items[i].album.artists.length; j++) {
                     console.log("Artist: " + response.tracks.items[i].album.artists[j].name);
                     console.log("Song: " + response.tracks.items[i].name);
@@ -71,31 +55,19 @@ function spotify() {
 function concert() {
     axios.get("https://rest.bandsintown.com/v4/artists/" + searchField + "/events?app_id=codingbootcamp").then(
         function (response) {
-
-            console.log(response.data.length);
-
             for (var i = 0; i < response.data.length; i++) {
                 console.log("-----------------------" + searchField + " event#" + (i + 1) + "------------------------------");
                 console.log("Name of Venue: " + response.data[i].venue.city + "," + response.data[i].venue.country);
                 console.log("Location of Venue: " + response.data[i].venue.location);
                 console.log("Date of Event: " + response.data[i].datetime);
-
-
             }
-
         })
         .catch(function (error) {
             if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
                 console.log("---------------Data---------------");
-
             } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an object that comes back with details pertaining to the error that occurred.
                 console.log(error.request);
             } else {
-                // Something happened in setting up the request that triggered an Error
                 console.log("Error", error.message);
             }
             console.log(error.config);
@@ -103,7 +75,42 @@ function concert() {
 };
 
 function movie() {
-    //enter axios 
+    if (!searchField) {
+        searchField = "Mr. Nobody";
+    }
+    axios.get("http://www.omdbapi.com/?apikey=trilogy&t=" + searchField).then(
+        function (response) {
+            //Fetch rotten tomatoes rating
+            var ratingsArray = response.data.Ratings;
+            var rottenTomatoesRating = "No Ratings Available";
+
+            for (var i = 0; i < ratingsArray.length; i++) {
+                if (ratingsArray[i].Source == "Rotten Tomatoes") {
+                    rottenTomatoesRating = ratingsArray[i].Value;
+                }
+            }
+            console.log(response.data);
+            console.log("Title of Movie: " + response.data.Title);
+            console.log("Year movie came out: " + response.data.Year);
+            console.log("IMDB Rating: " + response.data.imdbRAting);
+            console.log("Rotten Tomato Rating: " + rottenTomatoesRating);
+            console.log("Country of Production: " + response.data.Country);
+            console.log("Language: " + response.data.Language);
+            console.log("Plot:  " + response.data.Plot);
+            console.log("Actors: " + response.data.Actors);
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                console.log("---------------Data---------------");
+
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                console.log("Error", error.message);
+            }
+            console.log(error.config);
+        });
 };
 
 function dowit() {
