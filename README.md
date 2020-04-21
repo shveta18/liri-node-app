@@ -24,10 +24,15 @@ The soure lives in [liri.js](./liri.js). Each requirement is contained in its ow
 ```bash
 node liri.js [spotify-this-song|concert-this|movie-this] search term
 ```
+![Spotify](./spotify.gif)
+![Spotify No Criteria](./spotify-nocriteria.gif)
+![Movies](./movie.gif)
+![Movies No Criteria](./movie-nocriteria.gif)
+![Concert](./concert.gif)
+
 
 ### To run command from random.txt file
 
 ```bash
 node liri.js do-what-it-says
 ```
-
